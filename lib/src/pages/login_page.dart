@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
                     height: 210,
                     color: Colors.blueGrey[300],   
                     child: Center(
-                      child: Text('ClipPath', 
+                      child: Text('ClipPath version', 
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold, 
                                       fontSize: 30.0,
