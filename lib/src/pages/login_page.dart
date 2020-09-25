@@ -51,8 +51,24 @@ class LoginPage extends StatelessWidget {
                     ),               
                   )
                 ),
-                
+                Positioned( top: 45, left: -19, child: _crearCirculo(50) ),
+                Positioned( top: 120, right: -15, child: _crearCirculo(70) ),
+                Positioned( top: 62, left: 79, child: _crearCirculo(70) ),
+                Positioned( top: 25, right: 9, child: _crearCirculo(30) ),
+                Positioned( top: -100, left: 119, child: _crearCirculo(150) ),
               ]
+      ),
+    );
+  }
+
+  Widget _crearCirculo(double value){
+
+    return Container(
+      height: value,
+      width: value,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Color.fromRGBO(55, 155, 255, 0.3),
       ),
     );
   }
