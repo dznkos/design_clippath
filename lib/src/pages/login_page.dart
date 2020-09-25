@@ -41,29 +41,45 @@ class LoginPage extends StatelessWidget {
                     //margin: EdgeInsets.only(top: 480),
                     height: 210,
                     color: Colors.blueGrey[300],   
-                    child: Center(
-                      child: Text('ClipPath version', 
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold, 
-                                      fontSize: 30.0,
-                                      color: Colors.white),
-                                  ),
-                    ),               
+                    
                   )
                 ),
-                Positioned( top: 45, left: -19, child: _crearCirculo(50) ),
-                Positioned( top: 120, right: -15, child: _crearCirculo(70) ),
-                Positioned( top: 62, left: 79, child: _crearCirculo(70) ),
-                Positioned( top: 25, right: 9, child: _crearCirculo(30) ),
-                Positioned( top: -100, left: 119, child: _crearCirculo(150) ),
+                _crearHeader(),
+
+                
               ]
       ),
     );
   }
 
-  Widget _crearCirculo(double value){
+  Widget _crearHeader(){
 
-    return Container(
+    return Stack(
+      children: [
+        Positioned( top: 45, left: -19, child: _crearCirculo(50) ),
+        Positioned( top: 120, right: -15, child: _crearCirculo(70) ),
+        Positioned( top: 62, left: 79, child: _crearCirculo(70) ),
+        Positioned( top: 25, right: 9, child: _crearCirculo(30) ),
+        Positioned( top: -100, left: 119, child: _crearCirculo(150) ),
+
+        Container(
+          padding: EdgeInsetsDirectional.only(top: 35.0),
+          child: Column(
+            children: [
+              Icon( Icons.person_pin_circle, size: 80, color: Colors.red,),
+              SizedBox(width: double.infinity, height: 5,),
+              Text('Martucci', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 26, color: Colors.red ),)
+
+            ],
+          ),
+        )
+
+      ],
+    );
+  }
+
+  Widget _crearCirculo(double value){
+  return Container(
       height: value,
       width: value,
       decoration: BoxDecoration(
