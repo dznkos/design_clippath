@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
             )
           ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 30),
+            margin: EdgeInsets.symmetric(vertical: 20),
             padding: EdgeInsets.symmetric(vertical: 50),
             width: size.width * 0.85,
             decoration: BoxDecoration(
@@ -56,7 +56,9 @@ class LoginPage extends StatelessWidget {
                 _crearBoton(),
               ],
             ),
-          )
+          ),
+          Text('¿Olvido la contraseña?', style: TextStyle(color: Colors.grey, fontSize: 12,),),
+          SizedBox(height: 100.0,)
         ],
       ),
     );
@@ -93,7 +95,6 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _crearBoton(){
-
     return RaisedButton(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
@@ -102,9 +103,11 @@ class LoginPage extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5.0)
         ),
+        elevation: 0.0,
+        color: Colors.blueAccent,
+        textColor: Colors.white,
         onPressed: (){
-
-        }
+        },
     );
   }
 
