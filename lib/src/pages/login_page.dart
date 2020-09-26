@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_val/src/bloc/login_bloc.dart';
+import 'package:form_val/src/bloc/provider_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -20,6 +22,7 @@ class LoginPage extends StatelessWidget {
 
   Widget _loginForm(BuildContext context){
 
+    final login = Provider.of(context);
     final size = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
@@ -51,8 +54,8 @@ class LoginPage extends StatelessWidget {
               children: [
                 Text('Ingreso', style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold, color: Colors.blueAccent),),
                 SizedBox(height: 15.0,),
-                _crearCorreo(),
-                _crearPassword(),
+                _crearCorreo(login),
+                _crearPassword(login),
                 _crearBoton(),
               ],
             ),
@@ -64,34 +67,48 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _crearCorreo(){
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          icon: Icon(Icons.email, color: Colors.blueAccent),
-          hintText: 'example@gmail.com',
-          labelText: 'Correo Electronico'
-        ),
-      ),
-    );
+  Widget _crearCorreo(LoginBloc login){
 
+    return StreamBuilder(
+      stream: login.emailStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: TextField(
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              icon: Icon(Icons.email, color: Colors.blueAccent),
+              hintText: 'example@gmail.com',
+              labelText: 'Correo Electronico',
+              counterText: snapshot.data,
+            ),
+            onChanged: (value){
+              login.changeEmail(value);
+            },
+          ),
+        );
+      },    
+    );
   }
 
-  Widget _crearPassword(){
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-        maxLength: 15,
-        obscureText: true,
-        decoration: InputDecoration(
-            icon: Icon(Icons.lock_outline, color: Colors.blueAccent,),
-            labelText: 'Password'
-        ),
-      ),
+  Widget _crearPassword(LoginBloc login){
+    return StreamBuilder(
+      stream: login.passwordStream,
+      builder: (context, snapshot) {
+        return Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                    icon: Icon(Icons.lock_outline, color: Colors.blueAccent,),
+                    labelText: 'Password',
+                    counterText: snapshot.data,
+                ),
+                onChanged: login.changePassword,
+              ),
+        );
+      }, 
     );
-
   }
 
   Widget _crearBoton(){
@@ -160,7 +177,6 @@ class LoginPage extends StatelessWidget {
       children: [
         Positioned( top: 45, left: -19, child: _crearCirculo(50) ),
         Positioned( top: 120, right: -15, child: _crearCirculo(70) ),
-        Positioned( top: 62, left: 79, child: _crearCirculo(70) ),
         Positioned( top: 25, right: 9, child: _crearCirculo(30) ),
         Positioned( top: -100, left: 119, child: _crearCirculo(150) ),
 
@@ -186,7 +202,7 @@ class LoginPage extends StatelessWidget {
       width: value,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100.0),
-        color: Color.fromRGBO(55, 155, 255, 0.3),
+        color: Color.fromRGBO(255, 1, 15, 0.5),
       ),
     );
   }
