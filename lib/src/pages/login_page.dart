@@ -8,47 +8,95 @@ class LoginPage extends StatelessWidget {
 
     return Scaffold(
       body: Stack(
-              children: [ 
-                Container(
-                  margin: EdgeInsets.only(top: 180),
-                  height: 500.0,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: AlignmentDirectional.topCenter,
-                      end: AlignmentDirectional.bottomCenter,
-                      stops: [
-                        0.1,0.3,0.9,1.1,
-                      ],
-                      colors: [
-                        Colors.blue,
-                        Colors.blueAccent,
-                        Colors.blue[900].withOpacity(0.9),
-                        Color.fromRGBO(236, 226, 198, 1.0),
-                      ]
-                      )
-                  ),
-                ),                
-                ClipPath(
-                  clipper: MyClipperStyleOne(),
-                  child: Container(
-                    height: 220,
-                    color: Colors.lightBlue[100],                    
-                  )
-                ),
-                ClipPath(
-                  clipper: MyClipperStyleOne(),
-                  child: Container(
-                    //margin: EdgeInsets.only(top: 480),
-                    height: 210,
-                    color: Colors.blueGrey[300],   
-                    
-                  )
-                ),
-                _crearHeader(),
+              children: [
+                _crearFondo(),
+                _loginForm(context),
 
-                
               ]
       ),
+    );
+  }
+
+  Widget _loginForm(BuildContext context){
+
+    final size = MediaQuery.of(context).size;
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SafeArea(
+            child: Container(
+              height: 180.0,
+
+            )
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 30),
+            padding: EdgeInsets.symmetric(vertical: 50),
+            width: size.width * 0.85,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.white,
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 3.0,
+                  offset: Offset(0.0, 5.0),
+                  spreadRadius: 3.0,
+                )
+              ]
+            ),
+            child: Column(
+              children: [
+                Text('Ingreso', style: TextStyle(fontSize: 20.0),)
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _crearFondo(){
+    return Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 180),
+            height: 500.0,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: AlignmentDirectional.topCenter,
+                    end: AlignmentDirectional.bottomCenter,
+                    stops: [
+                      0.1,0.3,0.9,1.1,
+                    ],
+                    colors: [
+                      Colors.blue,
+                      Colors.blueAccent,
+                      Colors.blue[900].withOpacity(0.9),
+                      Color.fromRGBO(236, 226, 198, 1.0),
+                    ]
+                )
+            ),
+          ),
+          ClipPath(
+              clipper: MyClipperStyleOne(),
+              child: Container(
+                height: 220,
+                color: Colors.lightBlue[100],
+              )
+          ),
+          ClipPath(
+              clipper: MyClipperStyleOne(),
+              child: Container(
+                //margin: EdgeInsets.only(top: 480),
+                height: 210,
+                color: Colors.blueGrey[300],
+
+              )
+          ),
+          _crearHeader(),
+        ]
     );
   }
 
@@ -66,9 +114,9 @@ class LoginPage extends StatelessWidget {
           padding: EdgeInsetsDirectional.only(top: 35.0),
           child: Column(
             children: [
-              Icon( Icons.person_pin_circle, size: 80, color: Colors.red,),
+              Icon( Icons.person_pin_circle, size: 80, color: Colors.white,),
               SizedBox(width: double.infinity, height: 5,),
-              Text('Martucci', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 26, color: Colors.red ),)
+              Text('Martucci', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 26, color: Colors.white ),)
 
             ],
           ),
