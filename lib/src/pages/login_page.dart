@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text('Ingreso', style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold, color: Colors.blueAccent),),
+                Text('Login', style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold, color: Colors.blueAccent),),
                 SizedBox(height: 15.0,),
                 _crearCorreo(login),
                 _crearPassword(login),
@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
               ],
             ),
           ),
-          Text('¿Olvido la contraseña?', style: TextStyle(color: Colors.grey, fontSize: 12,),),
+          Text('¿Olvido la contraseña?', style: TextStyle(color: Colors.black54, fontSize: 12,),),
           SizedBox(height: 100.0,)
         ],
       ),
@@ -133,7 +133,7 @@ class LoginPage extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(top: 180),
-            height: 500.0,
+            height: 520.0,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: AlignmentDirectional.topCenter,
@@ -144,8 +144,8 @@ class LoginPage extends StatelessWidget {
                     colors: [
                       Colors.blue,
                       Colors.blueAccent,
-                      Colors.blue[900].withOpacity(0.9),
-                      Color.fromRGBO(236, 226, 198, 1.0),
+                      Colors.blue[300],
+                      Colors.teal
                     ]
                 )
             ),
@@ -153,8 +153,8 @@ class LoginPage extends StatelessWidget {
           ClipPath(
               clipper: MyClipperStyleOne(),
               child: Container(
-                height: 220,
-                color: Colors.lightBlue[100],
+                height: 225,
+                color: Colors.lightBlue[500],
               )
           ),
           ClipPath(
@@ -162,8 +162,7 @@ class LoginPage extends StatelessWidget {
               child: Container(
                 //margin: EdgeInsets.only(top: 480),
                 height: 210,
-                color: Colors.blueGrey[300],
-
+                color: Colors.teal[100],
               )
           ),
           _crearHeader(),
@@ -176,17 +175,16 @@ class LoginPage extends StatelessWidget {
     return Stack(
       children: [
         Positioned( top: 45, left: -19, child: _crearCirculo(50) ),
-        Positioned( top: 120, right: -15, child: _crearCirculo(70) ),
         Positioned( top: 25, right: 9, child: _crearCirculo(30) ),
         Positioned( top: -100, left: 119, child: _crearCirculo(150) ),
 
         Container(
-          padding: EdgeInsetsDirectional.only(top: 35.0),
+          padding: EdgeInsetsDirectional.only(top: 45.0),
           child: Column(
             children: [
-              Icon( Icons.person_pin_circle, size: 80, color: Colors.white,),
+              Icon( Icons.pets, size: 60, color: Colors.blue[400],),
               SizedBox(width: double.infinity, height: 5,),
-              Text('Martucci', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 26, color: Colors.white ),)
+              Text('<Name App>', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 26, color: Colors.blue[600] ),)
 
             ],
           ),
@@ -202,7 +200,7 @@ class LoginPage extends StatelessWidget {
       width: value,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100.0),
-        color: Color.fromRGBO(255, 1, 15, 0.5),
+        color: Color.fromRGBO(255, 255, 255, 0.4),
       ),
     );
   }
