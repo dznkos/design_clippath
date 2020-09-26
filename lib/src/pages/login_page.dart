@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -48,12 +49,62 @@ class LoginPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text('Ingreso', style: TextStyle(fontSize: 20.0),)
+                Text('Ingreso', style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold, color: Colors.blueAccent),),
+                SizedBox(height: 15.0,),
+                _crearCorreo(),
+                _crearPassword(),
+                _crearBoton(),
               ],
             ),
           )
         ],
       ),
+    );
+  }
+
+  Widget _crearCorreo(){
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: TextField(
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          icon: Icon(Icons.email, color: Colors.blueAccent),
+          hintText: 'example@gmail.com',
+          labelText: 'Correo Electronico'
+        ),
+      ),
+    );
+
+  }
+
+  Widget _crearPassword(){
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: TextField(
+        maxLength: 15,
+        obscureText: true,
+        decoration: InputDecoration(
+            icon: Icon(Icons.lock_outline, color: Colors.blueAccent,),
+            labelText: 'Password'
+        ),
+      ),
+    );
+
+  }
+
+  Widget _crearBoton(){
+
+    return RaisedButton(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
+          child: Text('Ingresar'),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0)
+        ),
+        onPressed: (){
+
+        }
     );
   }
 
