@@ -81,6 +81,7 @@ class LoginPage extends StatelessWidget {
               hintText: 'example@gmail.com',
               labelText: 'Correo Electronico',
               counterText: snapshot.data,
+              errorText: snapshot.error,
             ),
             onChanged: (value){
               login.changeEmail(value);
@@ -103,6 +104,7 @@ class LoginPage extends StatelessWidget {
                     icon: Icon(Icons.lock_outline, color: Colors.blueAccent,),
                     labelText: 'Password',
                     counterText: snapshot.data,
+                    errorText: snapshot.error,
                 ),
                 onChanged: login.changePassword,
               ),
