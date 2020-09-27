@@ -13,8 +13,6 @@ class Provider extends InheritedWidget{
   @override
   bool updateShouldNotify(InheritedWidget oldWidget ) => true;
 
-
-
   static LoginBloc of (BuildContext context){
     return (context.inheritFromWidgetOfExactType(Provider) as Provider).loginBloc;
   }

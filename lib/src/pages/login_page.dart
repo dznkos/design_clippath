@@ -56,7 +56,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: 15.0,),
                 _crearCorreo(login),
                 _crearPassword(login),
-                _crearBoton(),
+                _crearBoton(login),
               ],
             ),
           ),
@@ -80,12 +80,10 @@ class LoginPage extends StatelessWidget {
               icon: Icon(Icons.email, color: Colors.blueAccent),
               hintText: 'example@gmail.com',
               labelText: 'Correo Electronico',
-              counterText: snapshot.data,
-              errorText: snapshot.error,
+              //counterText: snapshot.data,
+              errorText: snapshot.error
             ),
-            onChanged: (value){
-              login.changeEmail(value);
-            },
+            onChanged: login.changeEmail            
           ),
         );
       },    
@@ -113,21 +111,29 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _crearBoton(){
-    return RaisedButton(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
-          child: Text('Ingresar'),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0)
-        ),
-        elevation: 0.0,
-        color: Colors.blueAccent,
-        textColor: Colors.white,
-        onPressed: (){
-        },
+  Widget _crearBoton(LoginBloc login){
+
+    return StreamBuilder(
+      stream: login.formValidateStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return RaisedButton(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
+              child: Text('Ingresar'),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+            ),
+            elevation: 0.0,
+            color: Colors.blueAccent,
+            textColor: Colors.white,
+            onPressed: snapshot.hasData ? (){} : null
+
+        );
+      },     
     );
+
+    
   }
 
   Widget _crearFondo(){

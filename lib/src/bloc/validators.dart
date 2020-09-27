@@ -18,7 +18,10 @@ class Validators {
   final validarEmail = StreamTransformer<String,String>.fromHandlers(
     handleData: ( email, sink) {
 
-      if ( email.contains('@') & email.contains('.') ){
+      Pattern pattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+      RegExp regExp = new RegExp(pattern);
+
+      if ( regExp.hasMatch( email ) ){
         sink.add(email);
       }else{
         sink.addError('Email debe ser valido');
