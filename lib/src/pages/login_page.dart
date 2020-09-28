@@ -127,95 +127,99 @@ class LoginPage extends StatelessWidget {
             elevation: 0.0,
             color: Colors.blueAccent,
             textColor: Colors.white,
-            onPressed: snapshot.hasData ? (){} : null
-
-        );
-      },     
-    );
-
-    
-  }
-
-  Widget _crearFondo(){
-    return Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 180),
-            height: 520.0,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: AlignmentDirectional.topCenter,
-                    end: AlignmentDirectional.bottomCenter,
-                    stops: [
-                      0.1,0.3,0.9,1.1,
-                    ],
-                    colors: [
-                      Colors.blue,
-                      Colors.blueAccent,
-                      Colors.blue[300],
-                      Colors.teal
+            onPressed: snapshot.hasData ? (){ _login(context,login); } : null
+            
+                    );
+                  },     
+                );
+            
+                
+              }
+            
+              Widget _crearFondo(){
+                return Stack(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 180),
+                        height: 520.0,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: AlignmentDirectional.topCenter,
+                                end: AlignmentDirectional.bottomCenter,
+                                stops: [
+                                  0.1,0.3,0.9,1.1,
+                                ],
+                                colors: [
+                                  Colors.blue,
+                                  Colors.blueAccent,
+                                  Colors.blue[300],
+                                  Colors.teal
+                                ]
+                            )
+                        ),
+                      ),
+                      ClipPath(
+                          clipper: MyClipperStyleOne(),
+                          child: Container(
+                            height: 225,
+                            color: Colors.lightBlue[500],
+                          )
+                      ),
+                      ClipPath(
+                          clipper: MyClipperStyleOne(),
+                          child: Container(
+                            //margin: EdgeInsets.only(top: 480),
+                            height: 210,
+                            color: Colors.teal[100],
+                          )
+                      ),
+                      _crearHeader(),
                     ]
-                )
-            ),
-          ),
-          ClipPath(
-              clipper: MyClipperStyleOne(),
-              child: Container(
-                height: 225,
-                color: Colors.lightBlue[500],
-              )
-          ),
-          ClipPath(
-              clipper: MyClipperStyleOne(),
-              child: Container(
-                //margin: EdgeInsets.only(top: 480),
-                height: 210,
-                color: Colors.teal[100],
-              )
-          ),
-          _crearHeader(),
-        ]
-    );
-  }
-
-  Widget _crearHeader(){
-
-    return Stack(
-      children: [
-        Positioned( top: 45, left: -19, child: _crearCirculo(50) ),
-        Positioned( top: 25, right: 9, child: _crearCirculo(30) ),
-        Positioned( top: -100, left: 119, child: _crearCirculo(150) ),
-
-        Container(
-          padding: EdgeInsetsDirectional.only(top: 45.0),
-          child: Column(
-            children: [
-              Icon( Icons.pets, size: 60, color: Colors.blue[400],),
-              SizedBox(width: double.infinity, height: 5,),
-              Text('<Name App>', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 26, color: Colors.blue[600] ),)
-
-            ],
-          ),
-        )
-
-      ],
-    );
-  }
-
-  Widget _crearCirculo(double value){
-  return Container(
-      height: value,
-      width: value,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100.0),
-        color: Color.fromRGBO(255, 255, 255, 0.4),
-      ),
-    );
-  }
+                );
+              }
+            
+              Widget _crearHeader(){
+            
+                return Stack(
+                  children: [
+                    Positioned( top: 45, left: -19, child: _crearCirculo(50) ),
+                    Positioned( top: 25, right: 9, child: _crearCirculo(30) ),
+                    Positioned( top: -100, left: 119, child: _crearCirculo(150) ),
+            
+                    Container(
+                      padding: EdgeInsetsDirectional.only(top: 45.0),
+                      child: Column(
+                        children: [
+                          Icon( Icons.pets, size: 60, color: Colors.blue[400],),
+                          SizedBox(width: double.infinity, height: 5,),
+                          Text('<Name App>', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 26, color: Colors.blue[600] ),)
+            
+                        ],
+                      ),
+                    )
+            
+                  ],
+                );
+              }
+            
+              Widget _crearCirculo(double value){
+              return Container(
+                  height: value,
+                  width: value,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100.0),
+                    color: Color.fromRGBO(255, 255, 255, 0.4),
+                  ),
+                );
+              }
+            
+              _login(BuildContext context, LoginBloc login) {                
+                
+                Navigator.pushReplacementNamed(context, 'home');
+              }
   
           
 }
-
 
 class MyClipperStyleOne extends CustomClipper<Path> {
   

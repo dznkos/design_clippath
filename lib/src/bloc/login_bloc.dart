@@ -22,7 +22,9 @@ class LoginBloc extends Validators {
   dispose(){
     _emailController?.close();
     _passwordController?.close();
-
   }
+
+  String get email => _emailController.value;
+  String get password => _passwordController.value;
 
 }
