@@ -1,5 +1,9 @@
 # form_val
 
+v0.1 - v1.3 => Login - Impl BLoC - InheritedWidget
+
+V1.3 - v2.0 => CRUD a ws REST - Models - (config) DB Firebase - Upload Photos
+
 Form Login App
 Diseño ClipPath, LinearGradients
 
