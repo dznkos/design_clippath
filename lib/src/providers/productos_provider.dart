@@ -19,6 +19,7 @@ class ProductoProvider{
 
     final decodeData = json.decode(resp.body);
 
+    //print('Error ' + decodeData );
     return true;
   }
 
@@ -26,7 +27,7 @@ class ProductoProvider{
 
     final url = '$_url/productos.json';
     
-    final resp = await http.post(url);
+    final resp = await http.get(url);
 
     final Map<String,dynamic> decodeData = json.decode(resp.body);
 
@@ -48,6 +49,27 @@ class ProductoProvider{
     return productos;
   }
 
+  Future<int> borrarProducto(String id) async{
 
+    final url = '$_url/productos/$id.json';
+    final resp = await http.delete(url);
+
+    print( resp.body );
+
+    return 1;
+  }
+
+  Future<bool> actualizarProducto(ProductoModel producto) async{
+
+    final url = '$_url/productos/${producto.id}.json';
+
+    final resp = await http.put(url, body: productoModelToJson(producto));
+
+    final Map<String,dynamic> decodeData = json.decode(resp.body);
+
+    print(decodeData);
+
+    return true;
+  }
 
 }

@@ -38,14 +38,14 @@ class HomePage extends StatelessWidget {
 
         return FutureBuilder(
           future: productoProvider.cargarProductos(),
-          builder: (context, snapshot) {
+          builder: (context, AsyncSnapshot<List<ProductoModel>> snapshot) {
             
             if ( snapshot.hasData ) {  
 
               final productos = snapshot.data;
               
               return ListView.builder(
-                itemCount: productos.lenght,
+                itemCount: productos.length,
                 itemBuilder: (context, i) => _crearItem(context,productos[i]),
               );
             
@@ -57,7 +57,6 @@ class HomePage extends StatelessWidget {
 
           },          
         );
-
       }
 
       Widget _crearItem(BuildContext context, ProductoModel producto){
@@ -68,12 +67,12 @@ class HomePage extends StatelessWidget {
             color: Colors.red,
           ),
             onDismissed: (direccion ){
-              //Borrar Producto
+              productoProvider.borrarProducto( producto.id);
             },
             child: ListTile(
             title: Text(' ${producto.titulo} - ${producto.valor}'),
             subtitle: Text(' ${producto.id} '),
-            onTap: () => Navigator.pushNamed(context, 'producto'),
+            onTap: () => Navigator.pushNamed(context, 'producto', arguments: producto),
           ),
         );
       }

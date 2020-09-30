@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_val/src/models/producto_model.dart';
+import 'package:form_val/src/providers/productos_provider.dart';
 
 import 'package:form_val/src/utils/utils.dart' as utils;
 
@@ -11,12 +12,23 @@ class ProductoPage extends StatefulWidget {
 
 class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final productoProvider = new ProductoProvider();
 
   ProductoModel producto = new ProductoModel();
+  bool _guardando = false;
 
   @override
   Widget build(BuildContext context) {
+
+    final ProductoModel prodData = ModalRoute.of(context).settings.arguments;
+
+    if ( prodData != null ){
+      producto = prodData;
+    }
+
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Text('Producto'),
         actions: [
@@ -94,8 +106,7 @@ class _ProductoPageState extends State<ProductoPage> {
       icon: Icon(Icons.save),
       color: Colors.blue[300],
       textColor: Colors.white,
-      onPressed: _submit
-      ,
+      onPressed: ( _guardando ) ? null : _submit,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0)        
       )
@@ -115,16 +126,39 @@ class _ProductoPageState extends State<ProductoPage> {
       );      
 
   }
+
   void _submit(){
 
     if ( !formKey.currentState.validate() ) return;
-    formKey.currentState.save();
 
-    print('Login Correcto');
-    print(producto.titulo);
-    print(producto.valor.toString());
-    print(producto.disponible);
+    formKey.currentState.save();
+        
+    setState(() {
+      _guardando = true;
+    });
+
+    if ( producto.id == null ){
+      productoProvider.crearProducto(producto);
+    }else{
+      productoProvider.actualizarProducto(producto);
+    }
+
+    setState(() {
+      _guardando = false;
+    });
+    mostrarSnackBar('Registro guardado');
+
+    Navigator.pop(context);
 
   }
 
+  void mostrarSnackBar(String mensaje){
+
+    final snackbar = SnackBar(
+      content: Text( mensaje ),
+      duration: Duration( milliseconds: 1500 ),
+      );
+      scaffoldKey.currentState.showSnackBar(snackbar);
+  }
+ 
 }
