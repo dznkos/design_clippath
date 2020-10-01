@@ -19,20 +19,20 @@ class HomePage extends StatelessWidget {
         title: Text('Home Page'),
       ),
       body: _cargarProductos(),
-            floatingActionButton: _crearFloatButton(context),
-                );
-              }
+      floatingActionButton: _crearFloatButton(context),
+    );
+  }
             
-              Widget _crearFloatButton(BuildContext context) {
-                return FloatingActionButton(
-                  child: Icon(Icons.add),
-                  backgroundColor: Colors.cyan,
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'producto');
-                  },
-                  );
-      
-              }
+      Widget _crearFloatButton(BuildContext context) {
+        return FloatingActionButton(
+          child: Icon(Icons.add),
+          backgroundColor: Colors.cyan,
+          onPressed: () {
+            Navigator.pushNamed(context, 'producto');
+          },
+          );
+
+      }
       
       Widget _cargarProductos() {
 

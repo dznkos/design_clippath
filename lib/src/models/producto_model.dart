@@ -11,21 +11,21 @@ class ProductoModel {
         this.titulo = '',
         this.valor = 0.0,
         this.disponible = false,
-        this.foroUrl,
+        this.fotoUrl,
     });
 
     String id;
     String titulo;
     double valor;
     bool disponible;
-    String foroUrl;
+    String fotoUrl;
 
     factory ProductoModel.fromJson(Map<String, dynamic> json) => ProductoModel(
         id: json["id"],
         titulo: json["titulo"],
         valor: json["valor"],
         disponible: json["disponible"],
-        foroUrl: json["foroUrl"],
+        fotoUrl: json["fotoUrl"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -33,6 +33,6 @@ class ProductoModel {
         "titulo"     : titulo,
         "valor"      : valor,
         "disponible" : disponible,
-        "foroUrl"    : foroUrl,
+        "fotoUrl"    : fotoUrl,
     };
 }
