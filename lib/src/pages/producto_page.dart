@@ -7,6 +7,7 @@ import 'package:form_val/src/providers/productos_provider.dart';
 import 'package:form_val/src/utils/utils.dart' as utils;
 import 'package:image_picker/image_picker.dart';
 
+
 class ProductoPage extends StatefulWidget {
   
   @override
@@ -133,15 +134,18 @@ class _ProductoPageState extends State<ProductoPage> {
 
   }
 
-  void _submit(){
+  void _submit() async{
+
 
     if ( !formKey.currentState.validate() ) return;
 
     formKey.currentState.save();
         
-    setState(() {
-      _guardando = true;
-    });
+    setState(() { _guardando = true;  });
+
+    if ( foto != null ) {
+      producto.fotoUrl = await productoProvider.subirImagen(foto);
+    }
 
     if ( producto.id == null ){
       productoProvider.crearProducto(producto);
