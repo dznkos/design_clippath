@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:form_val/src/bloc/login_bloc.dart';
 import 'package:form_val/src/bloc/provider_bloc.dart';
 
-class LoginPage extends StatelessWidget {
+class RegistroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text('Login', style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold, color: Colors.blueAccent),),
+                Text('Crear cuenta', style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold, color: Colors.blueAccent),),
                 SizedBox(height: 15.0,),
                 _crearCorreo(login),
                 _crearPassword(login),
@@ -61,8 +61,8 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           FlatButton(
-            onPressed: ()=> Navigator.pushReplacementNamed(context, 'registro'),
-            child: Text('Crear cuenta nueva', style: TextStyle(color: Colors.black54, fontSize: 12,),),
+            onPressed: ()=> Navigator.pushReplacementNamed(context, 'login'),
+            child: Text('¿Ya tienes cuenta?', style: TextStyle(color: Colors.black54, fontSize: 12,),),
           ),
 
           
@@ -124,7 +124,7 @@ class LoginPage extends StatelessWidget {
         return RaisedButton(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
-              child: Text('Ingresar'),
+              child: Text('Registrarme'),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0)
