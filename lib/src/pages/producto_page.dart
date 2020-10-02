@@ -175,7 +175,13 @@ class _ProductoPageState extends State<ProductoPage> {
     
     if ( producto.fotoUrl != null){
 
-      return Container();
+      return FadeInImage(
+        image: NetworkImage( producto.fotoUrl ),
+        placeholder: AssetImage('assets/jar-loading.gif'),
+        height: 300.0,
+        fit: BoxFit.contain, 
+        
+      );
     }else{
       return Image(
         image: AssetImage( foto?.path ?? 'assets/no-image.png'),
@@ -194,7 +200,7 @@ class _ProductoPageState extends State<ProductoPage> {
     );
 
     if( foto != null){
-      // limpieza
+      producto.fotoUrl = null;
     }
 
     setState(() {
