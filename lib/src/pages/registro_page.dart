@@ -2,8 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_val/src/bloc/login_bloc.dart';
 import 'package:form_val/src/bloc/provider_bloc.dart';
+import 'package:form_val/src/providers/usuario_provider.dart';
 
 class RegistroPage extends StatelessWidget {
+
+  final usuarioProvider = new UsuarioProvider();
+
   @override
   Widget build(BuildContext context) {
 
@@ -72,10 +76,10 @@ class RegistroPage extends StatelessWidget {
     );
   }
 
-  Widget _crearCorreo(LoginBloc login){
+  Widget _crearCorreo(LoginBloc bloc){
 
     return StreamBuilder(
-      stream: login.emailStream,
+      stream: bloc.emailStream,
       builder: (BuildContext context, AsyncSnapshot snapshot){
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -88,16 +92,16 @@ class RegistroPage extends StatelessWidget {
               //counterText: snapshot.data,
               errorText: snapshot.error
             ),
-            onChanged: login.changeEmail            
+            onChanged: bloc.changeEmail            
           ),
         );
       },    
     );
   }
 
-  Widget _crearPassword(LoginBloc login){
+  Widget _crearPassword(LoginBloc bloc){
     return StreamBuilder(
-      stream: login.passwordStream,
+      stream: bloc.passwordStream,
       builder: (context, snapshot) {
         return Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -109,17 +113,17 @@ class RegistroPage extends StatelessWidget {
                     counterText: snapshot.data,
                     errorText: snapshot.error,
                 ),
-                onChanged: login.changePassword,
+                onChanged: bloc.changePassword,
               ),
         );
       }, 
     );
   }
 
-  Widget _crearBoton(LoginBloc login){
+  Widget _crearBoton(LoginBloc bloc){
 
     return StreamBuilder(
-      stream: login.formValidateStream,
+      stream: bloc.formValidateStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return RaisedButton(
             child: Container(
@@ -132,97 +136,101 @@ class RegistroPage extends StatelessWidget {
             elevation: 0.0,
             color: Colors.blueAccent,
             textColor: Colors.white,
-            onPressed: snapshot.hasData ? (){ _login(context,login); } : null
+            onPressed: snapshot.hasData ? (){ _register(context,bloc); } : null
             
                     );
                   },     
                 );
             
                 
-              }
+  }
             
-              Widget _crearFondo(){
-                return Stack(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 180),
-                        height: 520.0,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: AlignmentDirectional.topCenter,
-                                end: AlignmentDirectional.bottomCenter,
-                                stops: [
-                                  0.1,0.3,0.9,1.1,
-                                ],
-                                colors: [
-                                  Colors.blue,
-                                  Colors.blueAccent,
-                                  Colors.blue[300],
-                                  Colors.teal
-                                ]
-                            )
-                        ),
-                      ),
-                      ClipPath(
-                          clipper: MyClipperStyleOne(),
-                          child: Container(
-                            height: 225,
-                            color: Colors.lightBlue[500],
-                          )
-                      ),
-                      ClipPath(
-                          clipper: MyClipperStyleOne(),
-                          child: Container(
-                            //margin: EdgeInsets.only(top: 480),
-                            height: 210,
-                            color: Colors.teal[100],
-                          )
-                      ),
-                      _crearHeader(),
+  Widget _crearFondo(){
+    return Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 180),
+            height: 520.0,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: AlignmentDirectional.topCenter,
+                    end: AlignmentDirectional.bottomCenter,
+                    stops: [
+                      0.1,0.3,0.9,1.1,
+                    ],
+                    colors: [
+                      Colors.blue,
+                      Colors.blueAccent,
+                      Colors.blue[300],
+                      Colors.teal
                     ]
-                );
-              }
+                )
+            ),
+          ),
+          ClipPath(
+              clipper: MyClipperStyleOne(),
+              child: Container(
+                height: 225,
+                color: Colors.lightBlue[500],
+              )
+          ),
+          ClipPath(
+              clipper: MyClipperStyleOne(),
+              child: Container(
+                //margin: EdgeInsets.only(top: 480),
+                height: 210,
+                color: Colors.teal[100],
+              )
+          ),
+          _crearHeader(),
+        ]
+    );
+  }
             
-              Widget _crearHeader(){
-            
-                return Stack(
-                  children: [
-                    Positioned( top: 45, left: -19, child: _crearCirculo(50) ),
-                    Positioned( top: 25, right: 9, child: _crearCirculo(30) ),
-                    Positioned( top: -100, left: 119, child: _crearCirculo(150) ),
-            
-                    Container(
-                      padding: EdgeInsetsDirectional.only(top: 45.0),
-                      child: Column(
-                        children: [
-                          Icon( Icons.pets, size: 60, color: Colors.blue[400],),
-                          SizedBox(width: double.infinity, height: 5,),
-                          Text('<Name App>', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 26, color: Colors.blue[600] ),)
-            
-                        ],
-                      ),
-                    )
-            
-                  ],
-                );
-              }
-            
-              Widget _crearCirculo(double value){
-              return Container(
-                  height: value,
-                  width: value,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100.0),
-                    color: Color.fromRGBO(255, 255, 255, 0.4),
-                  ),
-                );
-              }
-            
-              _login(BuildContext context, LoginBloc login) {                
-                
-                Navigator.pushReplacementNamed(context, 'home');
-              }
-  
+  Widget _crearHeader(){
+
+    return Stack(
+      children: [
+        Positioned( top: 45, left: -19, child: _crearCirculo(50) ),
+        Positioned( top: 25, right: 9, child: _crearCirculo(30) ),
+        Positioned( top: -100, left: 119, child: _crearCirculo(150) ),
+
+        Container(
+          padding: EdgeInsetsDirectional.only(top: 45.0),
+          child: Column(
+            children: [
+              Icon( Icons.pets, size: 60, color: Colors.blue[400],),
+              SizedBox(width: double.infinity, height: 5,),
+              Text('<Name App>', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 26, color: Colors.blue[600] ),)
+
+            ],
+          ),
+        )
+
+      ],
+    );
+  }
+
+  Widget _crearCirculo(double value){
+  return Container(
+      height: value,
+      width: value,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Color.fromRGBO(255, 255, 255, 0.4),
+      ),
+    );
+  }
+
+  _register(BuildContext context, LoginBloc bloc) {                
+    
+    usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
+    
+    //Navigator.pushReplacementNamed(context, 'home');
+
+
+  }
+
           
 }
 
