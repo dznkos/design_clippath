@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:form_val/src/bloc/login_bloc.dart';
 import 'package:form_val/src/bloc/provider_bloc.dart';
 import 'package:form_val/src/providers/usuario_provider.dart';
+import 'package:form_val/src/utils/utils.dart';
 
 class RegistroPage extends StatelessWidget {
 
@@ -26,7 +27,7 @@ class RegistroPage extends StatelessWidget {
 
   Widget _loginForm(BuildContext context){
 
-    final login = Provider.of(context);
+    final bloc = Provider.of(context);
     final size = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
@@ -58,9 +59,9 @@ class RegistroPage extends StatelessWidget {
               children: [
                 Text('Crear cuenta', style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold, color: Colors.blueAccent),),
                 SizedBox(height: 15.0,),
-                _crearCorreo(login),
-                _crearPassword(login),
-                _crearBoton(login),
+                _crearCorreo(bloc),
+                _crearPassword(bloc),
+                _crearBoton(bloc),
               ],
             ),
           ),
@@ -222,16 +223,18 @@ class RegistroPage extends StatelessWidget {
     );
   }
 
-  _register(BuildContext context, LoginBloc bloc) {                
+  _register(BuildContext context, LoginBloc bloc) async {                
     
-    usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
+    Map info = await usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
     
+    if ( info['ok'] ) {
+      Navigator.pushReplacementNamed(context, 'home');
+    }else {
+      mostrarAlerta(context, info['mensaje']);
+    }
     //Navigator.pushReplacementNamed(context, 'home');
 
-
-  }
-
-          
+  }          
 }
 
 class MyClipperStyleOne extends CustomClipper<Path> {
