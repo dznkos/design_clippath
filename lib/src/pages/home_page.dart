@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:form_val/src/bloc/provider.dart';
 
-import 'package:form_val/src/bloc/provider_bloc.dart';
 import 'package:form_val/src/models/producto_model.dart';
 
 import 'package:form_val/src/providers/productos_provider.dart';
 
 class HomePage extends StatelessWidget {
   
-  final productoProvider = new ProductoProvider();
 
   @override
   Widget build(BuildContext context) {
 
-    final login = Provider.of(context);
+    final productosBloc = Provider.productosBloc(context);
+    productosBloc.cargarProductos();
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
       ),
-      body: _cargarProductos(),
+      body: _cargarProductos(productosBloc),
       floatingActionButton: _crearFloatButton(context),
     );
   }
             
-      Widget _crearFloatButton(BuildContext context) {
+  Widget _crearFloatButton(BuildContext context) {
         return FloatingActionButton(
           child: Icon(Icons.add),
           backgroundColor: Colors.cyan,
@@ -32,21 +32,20 @@ class HomePage extends StatelessWidget {
           },
           );
 
-      }
+  }
       
-      Widget _cargarProductos() {
+  Widget _cargarProductos(ProductosBloc productosBloc) {
 
-        return FutureBuilder(
-          future: productoProvider.cargarProductos(),
-          builder: (context, AsyncSnapshot<List<ProductoModel>> snapshot) {
-            
+        return StreamBuilder(
+          stream: productosBloc.productosStream,
+          builder: (BuildContext context, AsyncSnapshot<List<ProductoModel>> snapshot){
+
             if ( snapshot.hasData ) {  
-
               final productos = snapshot.data;
               
               return ListView.builder(
                 itemCount: productos.length,
-                itemBuilder: (context, i) => _crearItem(context,productos[i]),
+                itemBuilder: (context, i) => _crearItem(context,productosBloc,productos[i]),
               );
             
             }else {
@@ -54,21 +53,18 @@ class HomePage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
+          }        
+        );        
+  }
 
-          },          
-        );
-      }
-
-      Widget _crearItem(BuildContext context, ProductoModel producto){
+  Widget _crearItem(BuildContext context, ProductosBloc productosBloc, ProductoModel producto){
 
         return Dismissible(
           key: UniqueKey(),
           background: Container(
             color: Colors.red,
           ),
-            onDismissed: (direccion ){
-              productoProvider.borrarProducto( producto.id);
-            },
+            onDismissed: (direccion )=> productosBloc.borrarProducto(producto.id),
             child: Card(
               child: Column(
                 children: [

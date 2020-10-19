@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:form_val/src/bloc/provider_bloc.dart';
+import 'package:form_val/src/bloc/provider.dart';
 
 import 'package:form_val/src/pages/home_page.dart';
 import 'package:form_val/src/pages/login_page.dart';

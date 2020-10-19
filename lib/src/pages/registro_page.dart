@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_val/src/bloc/login_bloc.dart';
-import 'package:form_val/src/bloc/provider_bloc.dart';
+import 'package:form_val/src/bloc/provider.dart';
 import 'package:form_val/src/providers/usuario_provider.dart';
 import 'package:form_val/src/utils/utils.dart';
 

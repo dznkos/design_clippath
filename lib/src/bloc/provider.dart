@@ -2,10 +2,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:form_val/src/bloc/login_bloc.dart';
+export 'package:form_val/src/bloc/login_bloc.dart';
+
+import 'package:form_val/src/bloc/productos_bloc.dart';
+export 'package:form_val/src/bloc/productos_bloc.dart';
 
 class Provider extends InheritedWidget{
 
   
+  // Unica instancia inicializada de Bloc's
+  final loginBloc = LoginBloc();
+  final _productosBloc = ProductosBloc();
+
+
   static Provider _instancia;
 
   // Singleton para provider
@@ -20,8 +29,6 @@ class Provider extends InheritedWidget{
   Provider._internal({ Key key, Widget child})
     : super (key: key, child: child);
 
-  // Unica instancia inicializada
-  final loginBloc = LoginBloc();
 
   //Provider({ Key key, Widget child})
   //  : super (key: key, child: child);
@@ -36,6 +43,10 @@ class Provider extends InheritedWidget{
  // - proveedor de loginbloc a contexto requerido
   static LoginBloc of (BuildContext context){
     return (context.inheritFromWidgetOfExactType(Provider) as Provider).loginBloc;
+  }
+
+  static ProductosBloc productosBloc (BuildContext context){
+    return (context.dependOnInheritedWidgetOfExactType() as Provider)._productosBloc;
   }
 
   
